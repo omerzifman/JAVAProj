@@ -1,4 +1,4 @@
-package moviesManager.dal;
+package com.spring.dal;
 
 public class MoviesHandler implements MoviesDao
 {
