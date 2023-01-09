@@ -1,42 +1,32 @@
 package com.spring.serialization;
 import java.util.ArrayList;
+import java.util.List;
+
+import com.spring.entities.Movie;
+
 import java.io.*;
 import java.util.ArrayList;
 
 public class Serialization<T>
 {
-	public void serialize(ArrayList<T> arr)
+	public void serialize(String fileName,ArrayList<T> list) throws IOException
 	{
-		try{
-	         FileOutputStream fos= new FileOutputStream("DataBase");
-	         ObjectOutputStream oos= new ObjectOutputStream(fos);
-	         oos.writeObject(arr);
-	         oos.close();
-	         fos.close();
-	       }catch(IOException ioe){
-	            ioe.printStackTrace();
-	        }
+         FileOutputStream fos= new FileOutputStream("C:\\Users\\Administrator\\Documents\\GitHub\\JAVAProj\\movies.dat");
+         ObjectOutputStream oos= new ObjectOutputStream(fos);
+         oos.writeObject(list);
+         oos.close();
+         fos.close();
 	}
-	public void deserialize(ArrayList<T> arr)
+	public ArrayList<T> deserialize(String fileName) throws IOException,ClassNotFoundException
 	{
-		 try
-	        {
-	            FileInputStream fis = new FileInputStream("DataBase");
-	            ObjectInputStream ois = new ObjectInputStream(fis);
-	            arr = (ArrayList<T>) ois.readObject();
-	            ois.close();
-	            fis.close();
-	         }
-		 catch(IOException ioe)
-		 {
-	             ioe.printStackTrace();
-	             return;
-	     }
-		 catch(ClassNotFoundException c)
-		 {
-	             System.out.println("Class not found");
-	             c.printStackTrace();
-	             return;
-	     }
+		 
+	        
+        FileInputStream fis = new FileInputStream("C:\\\\Users\\\\Administrator\\\\Documents\\\\GitHub\\\\JAVAProj\\\\DataBase.dat");
+        ObjectInputStream ois = new ObjectInputStream(fis);
+        ArrayList<T> arr = (ArrayList<T>) ois.readObject();
+        ois.close();
+        fis.close();
+        return arr;
+	         
 	}
 }

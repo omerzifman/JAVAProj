@@ -1,5 +1,9 @@
 package com.spring.dal;
 
+import java.util.List;
+
+import com.spring.entities.Movie;
+
 public interface MoviesDao
 {
 	public List<Movie> getAll() throws Exception;
