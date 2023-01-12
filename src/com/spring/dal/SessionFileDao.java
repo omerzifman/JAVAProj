@@ -1,6 +1,7 @@
 package com.spring.dal;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
@@ -21,7 +22,7 @@ public class SessionFileDao implements SessionsDao
 	public List<Session> getAll() throws Exception
 	{
 		ArrayList<Session> list = Serialzator.deserialize(fileName);
-		Serialzator.deserialize(fileName);
+		Collections.sort(list);
 		return list;
 	}
 	@Override
@@ -29,6 +30,7 @@ public class SessionFileDao implements SessionsDao
 	{
 		List<Session> list = Serialzator.deserialize(fileName);
 		list.add(session);
+		Serialzator.serialize(fileName, (ArrayList<Session>) list);
 		
 		
 	}
@@ -43,6 +45,7 @@ public class SessionFileDao implements SessionsDao
 				s = session;
 			}
 		}
+		Serialzator.serialize(fileName, (ArrayList<Session>) list);
 		
 	}
 	@Override
@@ -70,6 +73,7 @@ public class SessionFileDao implements SessionsDao
 				list.remove(s);
 			}
 		}
+		Serialzator.serialize(fileName, (ArrayList<Session>) list);
 		
 	}
 }

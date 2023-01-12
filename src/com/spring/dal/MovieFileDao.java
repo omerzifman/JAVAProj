@@ -1,6 +1,7 @@
 package com.spring.dal;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
@@ -20,7 +21,7 @@ public class MovieFileDao implements MoviesDao
 	public List<Movie> getAll() throws Exception
 	{
 		ArrayList<Movie> list = Serialzator.deserialize(fileName);
-		Serialzator.deserialize(fileName);
+		Collections.sort(list);
 		return list;
 	}
 	@Override
@@ -28,8 +29,7 @@ public class MovieFileDao implements MoviesDao
 	{
 		List<Movie> list = Serialzator.deserialize(fileName);
 		list.add(movie);
-		
-		
+		Serialzator.serialize(fileName, (ArrayList<Movie>) list);	
 	}
 	@Override
 	public void update(Movie movie) throws Exception
@@ -42,6 +42,7 @@ public class MovieFileDao implements MoviesDao
 				m = movie;
 			}
 		}
+		Serialzator.serialize(fileName, (ArrayList<Movie>) list);
 		
 	}
 	@Override
@@ -69,6 +70,7 @@ public class MovieFileDao implements MoviesDao
 				list.remove(m);
 			}
 		}
+		Serialzator.serialize(fileName, (ArrayList<Movie>) list);
 		
 	}
 }

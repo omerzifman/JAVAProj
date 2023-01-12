@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.spring.entities.Movie;
+import com.spring.entities.Session;
 
 import java.io.*;
 import java.util.ArrayList;
