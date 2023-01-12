@@ -7,12 +7,12 @@ import org.springframework.stereotype.Component;
 
 import com.spring.entities.Movie;
 import com.spring.serialization.Serialization;
-@Component("MoviesHandler")
-public class MoviesHandler implements MoviesDao
+@Component("MovieFileDao")
+public class MovieFileDao implements MoviesDao
 {
-	public static String fileName = "C:\\Users\\Administrator\\Documents\\GitHub\\JAVAProj\\movies.dat";
+	public static String fileName = ".\\movies.dat";
 	public static Serialization<Movie> Serialzator;
-	public MoviesHandler()
+	public MovieFileDao()
 	{
 		Serialzator = new Serialization<Movie>();
 	}

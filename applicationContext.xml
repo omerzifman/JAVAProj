@@ -8,22 +8,15 @@
     http://www.springframework.org/schema/context/spring-context.xsd">
 
     <!-- Define your beans here -->
-    <bean id = "circularFortuneService"
-    	class = "com.springdemo.CircularFortuneService">
-    	<property name = "arr" value = "wow,good,gooluck,farewell"/>
+    <bean id = "SessionService"
+    	class = "com.springdemo.service.SessionService">
+    	<property name = "maxSessions" value = "50"/>
+    	<property name = "latestHour" value = "01:00"/>
+    	<property name = "maxCapacityInCinema" value = "250"/>
     </bean >
-    <bean id = "numberGenerator"
-    	class = "com.springdemo.NumberGenerator">
-    	<property name = "n" value = "10"/>
+    <bean id = "MovieService"
+    	class = "com.springdemo.service.MovieService">
+    	<property name = "minAgeRestriction" value = "18"/>
     </bean >
-    <bean id = "tennisCoach"
-    	class = "com.springdemo.TennisCoach">
-    	<property name = "name" value = "Moshe"/>
-    	<property name = "yearOfExperience" value = "15"/>
-    </bean >
-    <bean id = "myCoach"
-    	class = "com.springdemo.BasketballCoach"
-    	scope = "singleton">
-    </bean >
-<context:component-scan base-package="com.springdemo"/>
+<context:component-scan base-package="com.spring"/>
 </beans>

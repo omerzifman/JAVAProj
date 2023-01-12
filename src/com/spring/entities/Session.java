@@ -1,10 +1,11 @@
 package com.spring.entities;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Session implements Comparable<Object>{
+public class Session implements Comparable<Object>,Serializable{
 	private String sessionID;
 	private String hallID;
 	private Date date;
@@ -31,7 +32,14 @@ public class Session implements Comparable<Object>{
 		this.ticketPrice=ticketPrice;
 		this.movieID = movieID;
 	}
-
+	public String getSessionID()
+	{
+		return sessionID;
+	}
+	public int getCapacity()
+	{
+		return capacity;
+	}
 	@Override
 	public String toString() {
 		return String.format("ID: %s\n hall: %s\n date: %s\n time: %s\n capacity: %d\n ticketPrice: %f\n movie: %s\n", sessionID, hallID, date, time, capacity, ticketPrice, movieID);

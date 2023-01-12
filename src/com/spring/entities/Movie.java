@@ -1,6 +1,8 @@
 package com.spring.entities;
 
-public class Movie implements Comparable<Object> {
+import java.io.Serializable;
+
+public class Movie implements Comparable<Object>,Serializable {
 	private String movieID;
 	private String title;
 	private int minAge;
@@ -13,6 +15,10 @@ public class Movie implements Comparable<Object> {
 	public String getMovieID()
 	{
 		return movieID;
+	}
+	public int getMinAge()
+	{
+		return minAge;
 	}
 
 	@Override

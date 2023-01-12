@@ -11,7 +11,7 @@ public class Serialization<T>
 {
 	public void serialize(String fileName,ArrayList<T> list) throws IOException
 	{
-         FileOutputStream fos= new FileOutputStream("C:\\Users\\Administrator\\Documents\\GitHub\\JAVAProj\\movies.dat");
+         FileOutputStream fos= new FileOutputStream(fileName);
          ObjectOutputStream oos= new ObjectOutputStream(fos);
          oos.writeObject(list);
          oos.close();
@@ -21,7 +21,7 @@ public class Serialization<T>
 	{
 		 
 	        
-        FileInputStream fis = new FileInputStream("C:\\\\Users\\\\Administrator\\\\Documents\\\\GitHub\\\\JAVAProj\\\\DataBase.dat");
+        FileInputStream fis = new FileInputStream(fileName);
         ObjectInputStream ois = new ObjectInputStream(fis);
         ArrayList<T> arr = (ArrayList<T>) ois.readObject();
         ois.close();
