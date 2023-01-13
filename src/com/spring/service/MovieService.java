@@ -33,7 +33,7 @@ public class MovieService
 	}
 	public void save(Movie movie) throws Exception
 	{
-		if(movie.getMinAge() < minAgeRestriction)
+		if(movie.getMinAge() > minAgeRestriction)
 		{
 			throw new AgeLimitToHighException("The age limit "+ movie.getMinAge() + " is too high and the movie will not make profit therefore is not added to cinema");
 		}
