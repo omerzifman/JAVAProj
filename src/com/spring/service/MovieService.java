@@ -15,6 +15,8 @@ import com.spring.Exceptions.NonexistingSessionIDToDeleteException;
 import com.spring.Exceptions.NonexistingSessionToUpdateException;
 import com.spring.dal.MoviesDao;
 import com.spring.entities.Movie;
+import com.spring.entities.Session;
+import com.spring.serialization.Serialization;
 @Component("MovieService")
 public class MovieService
 {
