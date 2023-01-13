@@ -32,6 +32,10 @@ public class Session implements Comparable<Object>,Serializable{
 		this.ticketPrice=ticketPrice;
 		this.movieID = movieID;
 	}
+	public String getMovieID()
+	{
+		return movieID;
+	}
 	public String getSessionID()
 	{
 		return sessionID;
