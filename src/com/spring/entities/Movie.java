@@ -35,7 +35,7 @@ public class Movie implements Comparable<Object>,Serializable {
 			return false;
 		if (obj.getClass() == this.getClass()) {
 			m = (Movie) obj;
-			return this.movieID == m.movieID;
+			return this.movieID.equals(m.movieID);
 		} else
 			return false;
 	}

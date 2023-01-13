@@ -58,7 +58,7 @@ public class Session implements Comparable<Object>,Serializable{
 			return false;
 		if (obj.getClass() == this.getClass()) {
 			s = (Session) obj;
-			return this.sessionID == s.sessionID;
+			return this.sessionID.equals(s.sessionID);
 		} else
 			return false;
 	}

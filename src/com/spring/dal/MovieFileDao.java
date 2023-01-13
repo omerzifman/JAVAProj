@@ -35,11 +35,12 @@ public class MovieFileDao implements MoviesDao
 	public void update(Movie movie) throws Exception
 	{
 		List<Movie> list = Serialzator.deserialize(fileName);
-		for(Movie m : list)
+		for (int i = 0; i < list.size(); i++)
 		{
-			if(m.getMovieID() == (movie.getMovieID()))
+			if(list.get(i).getMovieID().equals(movie.getMovieID()))
 			{
-				m = movie;
+				list.remove(list.get(i));
+				list.add(movie);
 			}
 		}
 		Serialzator.serialize(fileName, (ArrayList<Movie>) list);
@@ -49,11 +50,11 @@ public class MovieFileDao implements MoviesDao
 	public Movie get(String id) throws Exception
 	{
 		List<Movie> list = Serialzator.deserialize(fileName);
-		for(Movie m : list)
+		for (int i = 0; i < list.size(); i++)
 		{
-			if(m.getMovieID() == id)
+			if(list.get(i).getMovieID().equals(id))
 			{
-				return m; 
+				return list.get(i);
 			}
 		}
 		
@@ -63,11 +64,11 @@ public class MovieFileDao implements MoviesDao
 	public void delete(String id) throws Exception
 	{
 		List<Movie> list = Serialzator.deserialize(fileName);
-		for(Movie m : list)
+		for (int i = 0; i < list.size(); i++)
 		{
-			if(m.getMovieID() == id)
+			if(list.get(i).getMovieID().equals(id))
 			{
-				list.remove(m);
+				list.remove(list.get(i));
 			}
 		}
 		Serialzator.serialize(fileName, (ArrayList<Movie>) list);

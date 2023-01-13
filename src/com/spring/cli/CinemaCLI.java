@@ -11,12 +11,12 @@ import com.spring.service.MovieService;
 import com.spring.service.SessionService;
 
 public class CinemaCLI {
-	static SessionService Theaters;
+	static SessionService Sessions;
 	static MovieService Movies;
 
 	public static void initBeans() {
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-		Theaters = context.getBean("SessionService", SessionService.class);
+		Sessions = context.getBean("SessionService", SessionService.class);
 		Movies = context.getBean("MovieService", MovieService.class);
 	}
 
@@ -37,12 +37,12 @@ public class CinemaCLI {
 	// print menu and return user's selection - int
 	public static int menu() {
 		System.out.println("HI! welcome to our Cinema :) \n please select an option from the menu:"
-				+ "\n  1. Show movies" + "\n  2. Show movie theaters" + "\n  3. Add a movie" + "\n  4. Update a movie"
-				+ "\n  5. Delete a movie" + "\n  6. Add a theater" + "\n  7. Update a theater"
-				+ "\n  8. Delete a theater" + "\n  9. Exit" + "\n");
+				+ "\n  1. Show movies" + "\n  2. Show sessions" + "\n  3. get movie by id" + "\n  4. Add a movie" + "\n  5. Update a movie"
+				+ "\n  6. Delete a movie" + "\n  7. get session by id" + "\n  8. Add a session" + "\n  9. Update a session"
+				+ "\n  10. Delete a session" + "\n  0. Exit" + "\n");
 		int selection = getInputInt("\nYour selection:");
 		// checks if the selection is legal, else re-inputs it
-		while (selection <= 0 || (selection > 8 && selection != 9)) {
+		while (selection < 0 || selection > 10) {
 			selection = getInputInt("illegal selection");
 		}
 		return selection;
@@ -56,49 +56,45 @@ public class CinemaCLI {
 			allMovies = Movies.getAll();
 			for (int i = 0; i < allMovies.size(); i++) {
 				System.out.println(allMovies.get(i));
-				List<Session> allTheaters = Theaters.getAll();
-				// print theater the movie is projected in
-				for (int j = 0; j < allTheaters.size(); j++) {
-					if (allTheaters.get(j).getMovieID().equals(allMovies.get(i).getMovieID()))
-						System.out.println("The movie is projected n these theater: " + allMovies.get(i));
+				List<Session> allSession = Sessions.getAll();
+				// print session the movie is projected in
+				for (int j = 0; j < allSession.size(); j++) {
+					if (allSession.get(j).getMovieID().equals(allMovies.get(i).getMovieID()))
+						System.out.println("The movie is projected in those sessions: " + allSession.get(i));
 					System.out.println("");
 				}
 			}
 		} catch (Exception e) {
 			System.out.println(e);
-		} finally {
-			return;
-		}
+		} 
 
 	}
 
-	// _____Show Movie Theaters_____
-	public static void ShowMovieTheaters() {
-		System.out.println("_____Show Movie Theaters_____");
-		List<Session> allTheaters = null;
+	// _____Show Sessions_____
+	public static void ShowSessions() {
+		System.out.println("_____Show Sessions_____");
+		List<Session> allSessions = null;
 		try {
-			allTheaters = Theaters.getAll();
-			for (int i = 0; i < allTheaters.size(); i++) {
-				System.out.println(allTheaters.get(i));
+			allSessions = Sessions.getAll();
+			for (int i = 0; i < allSessions.size(); i++) {
+				System.out.println(allSessions.get(i));
 				// print the movie projected
 				List<Movie> allMovies = Movies.getAll();
 				for (int j = 0; j < allMovies.size(); j++) {
-					if (allTheaters.get(i).getMovieID().equals(allMovies.get(j).getMovieID()))
+					if (allSessions.get(i).getMovieID().equals(allMovies.get(j).getMovieID()))
 						System.out.println("The movie is projected n these theater: " + allMovies.get(j));
 				}
 				System.out.println("");
 			}
 		} catch (Exception e) {
 			System.out.println(e);
-		} finally {
-			return;
-		}
+		} 
 
 	}
 
-	// _____Add Theater_____
-	public static void AddTheater() {
-		System.out.println("_____Add Theater_____");
+	// _____Add Session_____
+	public static void AddSession() {
+		System.out.println("_____Add Session_____");
 		String sessionID = getInputString("please enter theater id: ");
 		String hallID = getInputString("please enter hall id: ");
 		String date = getInputString("please enter date: ");
@@ -108,19 +104,18 @@ public class CinemaCLI {
 		String movieID = getInputString("please enter movie id: ");
 		Session toAdd = new Session(sessionID, hallID, date, time, capacity, (float) ticketPrice, movieID);
 		try {
-			Theaters.save(toAdd);
+			Sessions.save(toAdd);
+			System.out.println("Session added");
 		} catch (Exception e) {
 			System.out.println(e);
-		} finally {
-			return;
-		}
+		} 
 
 	}
 
-	// _____Update Theater_____
-	public static void UpdateTheater() {
-		System.out.println("_____Update Theater_____");
-		String theaterID = getInputString("please enter updated theater id: ");
+	// _____Update Session_____
+	public static void UpdateSession() {
+		System.out.println("_____Update Session_____");
+		String sessionID = getInputString("please enter updated theater id: ");
 		String hallID = getInputString("please enter updated hall id: ");
 		String date = getInputString("please enter updated date: ");
 		String time = getInputString("please enter updated time: ");
@@ -128,29 +123,56 @@ public class CinemaCLI {
 		int ticketPrice = getInputInt("please enter updated ticket price: ");
 		String movieID = getInputString("please enter updated movie id: ");
 		try {
-			Session toUpdate = new Session(theaterID, hallID, date, time, capacity, (float) ticketPrice, movieID);
-			Theaters.update(toUpdate);
+			Session toUpdate = new Session(sessionID, hallID, date, time, capacity, (float) ticketPrice, movieID);
+			Sessions.update(toUpdate);
+			System.out.println("Session updated");
 		} catch (Exception e) {
 			System.out.println(e);
-		} finally {
-			return;
-		}
+		} 
 
 	}
 
-	// _____Delete Movies_____
-	public static void DeleteTheater() {
-		System.out.println("_____Delete Theater_____");
-		String theaterID = getInputString("please enter movie id: ");
+	// _____Show Session by ID_____
+	public static void GetSession() {
+		System.out.println("_____Show Session by ID_____");
+		String sessionID = getInputString("please enter session id: ");
 		try {
-			Theaters.delete(theaterID);
-			System.out.println("theater deleted");
+			Session temp = Sessions.get(sessionID);
+			if(temp == null)
+				System.out.println("session not found");
+			else
+				System.out.println(temp);
 		} catch (Exception e) {
 			System.out.println(e);
-		} finally {
-			return;
-		}
+		} 
 	}
+	
+	// _____Show Movie by ID_____
+		public static void GetMovie() {
+			System.out.println("_____Show Movie by ID_____");
+			String movieID = getInputString("please enter movie id: ");
+			try {
+				Movie temp = Movies.get(movieID);
+				if(temp == null)
+					System.out.println("movie not found");
+				else
+					System.out.println(temp);
+			} catch (Exception e) {
+				System.out.println(e);
+			} 
+		}
+	
+	// _____Delete Session_____
+		public static void DeleteSession() {
+			System.out.println("_____Delete Session_____");
+			String sessionID = getInputString("please enter movie id: ");
+			try {
+				Sessions.delete(sessionID);
+				System.out.println("Session deleted");
+			} catch (Exception e) {
+				System.out.println(e);
+			} 
+		}
 
 	// _____Add Movie_____
 	public static void AddMovie() {
@@ -161,11 +183,10 @@ public class CinemaCLI {
 		Movie toAdd = new Movie(movieID, title, minAge);
 		try {
 			Movies.save(toAdd);
+			System.out.println("movie added");
 		} catch (Exception e) {
 			System.out.println(e);
-		} finally {
-			return;
-		}
+		} 
 
 	}
 
@@ -178,11 +199,10 @@ public class CinemaCLI {
 		try {
 			Movie toUpdate = new Movie(movieID, title, minAge);
 			Movies.update(toUpdate);
+			System.out.println("movie updated");
 		} catch (Exception e) {
 			System.out.println(e);
-		} finally {
-			return;
-		}
+		} 
 
 	}
 
@@ -195,45 +215,59 @@ public class CinemaCLI {
 			System.out.println("movie deleted");
 		} catch (Exception e) {
 			System.out.println(e);
-		} finally {
-			return;
-		}
+		} 
 	}
 
 	public static void main(String args[]) // static method
 	{
 		//init cinema
 		initBeans(); // generate
-		Theaters.setMaxSessions(5); // num of theaters in cinema
-		Theaters.setMaxCapacityInCinema(500);
+		Sessions.setMaxSessions(5); // num of theaters in cinema
+		Sessions.setMaxCapacityInCinema(500);
 
 		// ------------------------menu-------------------------------------
 
 		int selection;
 		while (true) {
+			System.out.println("");
 			selection = menu();
 			switch (selection) {
-			case 9:
+			case 0:
 				System.out.println("--Exit-- \n" + "        GoodBye");
 				System.exit(0);
 			case 1:
 				ShowMovies();
+				break;
 			case 2:
-				ShowMovieTheaters();
+				ShowSessions();
+				break;
 			case 3:
-				AddMovie();
+				GetMovie();
+				break;
 			case 4:
-				UpdateMovies();
+				AddMovie();
+				break;
 			case 5:
-				DeleteMovies();
+				UpdateMovies();
+				break;
 			case 6:
-				AddTheater();
+				DeleteMovies();
+				break;
 			case 7:
-				UpdateTheater();
+				GetSession();
+				break;
 			case 8:
-				DeleteTheater();
+				AddSession();
+				break;
+			case 9:
+				UpdateSession();
+				break;
+			case 10:
+				DeleteSession();
+				break;
 			default:
 				System.out.println("Error - menu selection");
+				break;
 			}
 		}
 	}
