@@ -38,11 +38,12 @@ public class SessionFileDao implements SessionsDao
 	public void update(Session session) throws Exception
 	{
 		List<Session> list = Serialzator.deserialize(fileName);
-		for(Session s : list)
+		for (int i = 0; i < list.size(); i++)
 		{
-			if(s.getSessionID() == (session.getSessionID()))
+			if(list.get(i).getSessionID().equals(session.getMovieID()))
 			{
-				s = session;
+				list.remove(list.get(i));
+				list.add(session);
 			}
 		}
 		Serialzator.serialize(fileName, (ArrayList<Session>) list);
@@ -52,11 +53,11 @@ public class SessionFileDao implements SessionsDao
 	public Session get(String id) throws Exception
 	{
 		List<Session> list = Serialzator.deserialize(fileName);
-		for(Session s : list)
+		for (int i = 0; i < list.size(); i++)
 		{
-			if(s.getSessionID() == id)
+			if(list.get(i).getSessionID().equals(id))
 			{
-				return s; 
+				return list.get(i);
 			}
 		}
 		
@@ -66,11 +67,11 @@ public class SessionFileDao implements SessionsDao
 	public void delete(String id) throws Exception
 	{
 		List<Session> list = Serialzator.deserialize(fileName);
-		for(Session s : list)
+		for (int i = 0; i < list.size(); i++)
 		{
-			if(s.getSessionID() == id)
+			if(list.get(i).getSessionID().equals(id))
 			{
-				list.remove(s);
+				list.remove(list.get(i));
 			}
 		}
 		Serialzator.serialize(fileName, (ArrayList<Session>) list);
