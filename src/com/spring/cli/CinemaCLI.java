@@ -95,7 +95,7 @@ public class CinemaCLI {
 	// _____Add Session_____
 	public static void AddSession() {
 		System.out.println("_____Add Session_____");
-		String sessionID = getInputString("please enter theater id: ");
+		String sessionID = getInputString("please enter session id: ");
 		String hallID = getInputString("please enter hall id: ");
 		String date = getInputString("please enter date: ");
 		String time = getInputString("please enter time: ");
@@ -165,7 +165,7 @@ public class CinemaCLI {
 	// _____Delete Session_____
 		public static void DeleteSession() {
 			System.out.println("_____Delete Session_____");
-			String sessionID = getInputString("please enter movie id: ");
+			String sessionID = getInputString("please enter session id: ");
 			try {
 				Sessions.delete(sessionID);
 				System.out.println("Session deleted");

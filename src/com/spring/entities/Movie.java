@@ -23,7 +23,7 @@ public class Movie implements Comparable<Object>,Serializable {
 
 	@Override
 	public String toString() {
-		return String.format("ID: %s\n title: %s\n minAge: %d\n", movieID, title, minAge);
+		return String.format("ID: %s\ntitle: %s\nminAge: %d\n", movieID, title, minAge);
 	}
 
 	@Override
