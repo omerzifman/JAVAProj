@@ -42,14 +42,24 @@ public class MovieService
 	}
 	public String getAvaliableMovieId() throws Exception
 	{
+		boolean legalId =false;
 		List<Movie> list = getAll();
 		int minimumId = 1;
-		for(int i =0;i< list.size();i++)
+		while(!legalId)
 		{
-			if(list.get(i).getMovieID().equals(Integer.toString(minimumId)))
+			for(int i =0;i< list.size();i++)
 			{
-				minimumId++;
-				System.out.println(minimumId);
+				if(list.get(i).getMovieID().equals(Integer.toString(minimumId)))
+				{
+					minimumId++;				}
+			}
+			legalId = true;
+			for(int i =0;i< list.size();i++)
+			{
+				if(list.get(i).getMovieID().equals(Integer.toString(minimumId)))
+				{
+					legalId = false;
+				}
 			}
 		}
 		return Integer.toString(minimumId);

@@ -17,7 +17,6 @@ import com.spring.Exceptions.NonexistingSessionToUpdateException;
 import com.spring.Exceptions.NotEnoughCapacityForSessionException;
 import com.spring.Exceptions.NotEnoughSpaceException;
 import com.spring.dal.SessionFileDao;
-import com.spring.entities.Movie;
 import com.spring.entities.Session;
 import com.spring.serialization.Serialization;
 @Component("SessionService")
@@ -63,12 +62,24 @@ public class SessionService
 	public String getAvaliableSessionId() throws Exception
 	{
 		List<Session> list = getAll();
+		boolean legalId = false;
 		int minimumId = 1;
-		for(int i =0;i< list.size();i++)
+		while(!legalId)
 		{
-			if(list.get(i).getSessionID().equals(Integer.toString(minimumId)))
+			for(int i =0;i< list.size();i++)
 			{
-				minimumId++;
+				if(list.get(i).getSessionID().equals(Integer.toString(minimumId)))
+				{
+					minimumId++;
+				}
+			}
+			legalId = true;
+			for(int i =0;i< list.size();i++)
+			{
+				if(list.get(i).getSessionID().equals(Integer.toString(minimumId)))
+				{
+					legalId = false;
+				}
 			}
 		}
 		return Integer.toString(minimumId);
@@ -97,17 +108,17 @@ public class SessionService
 	@PostConstruct
 	private void doStartupActions() throws Exception
 	{
-		for(Session movie: getAll())
+		for(Session session: getAll())
 		{
-			System.out.println(movie);
+			System.out.println(session);
 		}
 	}
 	@PreDestroy
 	private void doCleanUpActions() throws Exception
 	{
-		for(Session movie: getAll())
+		for(Session session: getAll())
 		{
-			System.out.println(movie);
+			System.out.println(session);
 		}
 	}
 }
