@@ -95,14 +95,13 @@ public class CinemaCLI {
 	// _____Add Session_____
 	public static void AddSession() {
 		System.out.println("_____Add Session_____");
-		String sessionID = getInputString("please enter session id: ");
 		String hallID = getInputString("please enter hall id: ");
 		String date = getInputString("please enter date: ");
 		String time = getInputString("please enter time: ");
 		int capacity = getInputInt("please enter capacity: ");
 		int ticketPrice = getInputInt("please enter ticket price: ");
 		String movieID = getInputString("please enter movie id: ");
-		Session toAdd = new Session(sessionID, hallID, date, time, capacity, (float) ticketPrice, movieID);
+		Session toAdd = new Session(hallID, date, time, capacity, (float) ticketPrice, movieID);
 		try {
 			Sessions.save(toAdd);
 			System.out.println("Session added");
@@ -115,7 +114,7 @@ public class CinemaCLI {
 	// _____Update Session_____
 	public static void UpdateSession() {
 		System.out.println("_____Update Session_____");
-		String sessionID = getInputString("please enter updated theater id: ");
+		String sessionID = getInputString("please enter session id: ");
 		String hallID = getInputString("please enter updated hall id: ");
 		String date = getInputString("please enter updated date: ");
 		String time = getInputString("please enter updated time: ");
@@ -123,7 +122,8 @@ public class CinemaCLI {
 		int ticketPrice = getInputInt("please enter updated ticket price: ");
 		String movieID = getInputString("please enter updated movie id: ");
 		try {
-			Session toUpdate = new Session(sessionID, hallID, date, time, capacity, (float) ticketPrice, movieID);
+			Session toUpdate = new Session(hallID, date, time, capacity, (float) ticketPrice, movieID);
+			toUpdate.setSessionID(sessionID);
 			Sessions.update(toUpdate);
 			System.out.println("Session updated");
 		} catch (Exception e) {
@@ -177,10 +177,9 @@ public class CinemaCLI {
 	// _____Add Movie_____
 	public static void AddMovie() {
 		System.out.println("_____Add Movie_____");
-		String movieID = getInputString("please enter movie id: ");
 		String title = getInputString("please enter movies title: ");
 		int minAge = getInputInt("please enter movie age limit: ");
-		Movie toAdd = new Movie(movieID, title, minAge);
+		Movie toAdd = new Movie(title, minAge);
 		try {
 			Movies.save(toAdd);
 			System.out.println("movie added");
@@ -197,7 +196,8 @@ public class CinemaCLI {
 		String title = getInputString("please enter updated movies title: ");
 		int minAge = getInputInt("please enter updated movie age limit: ");
 		try {
-			Movie toUpdate = new Movie(movieID, title, minAge);
+			Movie toUpdate = new Movie(title, minAge);
+			toUpdate.setMovieID(movieID);
 			Movies.update(toUpdate);
 			System.out.println("movie updated");
 		} catch (Exception e) {
@@ -222,7 +222,7 @@ public class CinemaCLI {
 	{
 		//init cinema
 		initBeans(); // generate
-
+		// Fix Letters input
 		// ------------------------menu-------------------------------------
 
 		int selection;

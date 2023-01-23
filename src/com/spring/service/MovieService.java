@@ -37,7 +37,22 @@ public class MovieService
 		{
 			throw new AgeLimitToHighException("The age limit "+ movie.getMinAge() + " is too high and the movie will not make profit therefore is not added to cinema");
 		}
+		movie.setMovieID(getAvaliableMovieId());
 		movieHandler.save(movie);	
+	}
+	public String getAvaliableMovieId() throws Exception
+	{
+		List<Movie> list = getAll();
+		int minimumId = 1;
+		for(int i =0;i< list.size();i++)
+		{
+			if(list.get(i).getMovieID().equals(Integer.toString(minimumId)))
+			{
+				minimumId++;
+				System.out.println(minimumId);
+			}
+		}
+		return Integer.toString(minimumId);
 	}
 	public void update(Movie movie) throws Exception
 	{

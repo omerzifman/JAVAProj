@@ -11,8 +11,8 @@ import com.spring.serialization.Serialization;
 @Component("MovieFileDao")
 public class MovieFileDao implements MoviesDao
 {
-	public static String fileName = "src\\movies.dat";
-	public static Serialization<Movie> Serialzator;
+	private String fileName = "src\\movies.dat";
+	private Serialization<Movie> Serialzator;
 	public MovieFileDao()
 	{
 		Serialzator = new Serialization<Movie>();

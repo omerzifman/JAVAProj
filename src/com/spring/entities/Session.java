@@ -5,42 +5,49 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Session implements Comparable<Object>,Serializable{
+public class Session implements Comparable<Object>, Serializable {
 	private String sessionID;
 	private String hallID;
 	private Date dateAndTime;
 	private int capacity;
 	private float ticketPrice;
 	private String movieID;
-	public Session(String sessionID,String hallID, String date, String time,int capacity, float ticketPrice, String movieID) {
-		this.sessionID=sessionID;
-		this.hallID=hallID;
-		SimpleDateFormat d1= new SimpleDateFormat("yyyy/MM/dd hh:mm");
+
+	public Session(String hallID, String date, String time, int capacity, float ticketPrice, String movieID) {
+		this.sessionID = "";
+		this.hallID = hallID;
+		SimpleDateFormat d1 = new SimpleDateFormat("yyyy/MM/dd hh:mm");
 		try {
-			System.out.println(date +" "+time);
-			this.dateAndTime=d1.parse(date +" "+time);
+			System.out.println(date + " " + time);
+			this.dateAndTime = d1.parse(date + " " + time);
 		} catch (ParseException e) {
 			System.out.println("Bad date format");
 		}
-		this.capacity=capacity;
-		this.ticketPrice=ticketPrice;
+		this.capacity = capacity;
+		this.ticketPrice = ticketPrice;
 		this.movieID = movieID;
 	}
-	public String getMovieID()
-	{
+
+	public String getMovieID() {
 		return movieID;
 	}
-	public String getSessionID()
-	{
+
+	public String getSessionID() {
 		return sessionID;
 	}
-	public int getCapacity()
-	{
+
+	public void setSessionID(String sessionID) {
+		this.sessionID = sessionID;
+	}
+
+	public int getCapacity() {
 		return capacity;
 	}
+
 	@Override
 	public String toString() {
-		return String.format("ID: %s\nhall: %s\nDate & time: %s\ncapacity: %d\nticketPrice: %f\nmovie: %s\n", sessionID, hallID, dateAndTime,capacity, ticketPrice, movieID);
+		return String.format("ID: %s\nhall: %s\nDate & time: %s\ncapacity: %d\nticketPrice: %f\nmovie: %s\n", sessionID,
+				hallID, dateAndTime, capacity, ticketPrice, movieID);
 	}
 
 	@Override
@@ -59,6 +66,6 @@ public class Session implements Comparable<Object>,Serializable{
 
 	@Override
 	public int compareTo(Object o) {
-		return this.dateAndTime.compareTo(((Session)o).dateAndTime);
+		return this.dateAndTime.compareTo(((Session) o).dateAndTime);
 	}
 }

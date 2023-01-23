@@ -2,22 +2,26 @@ package com.spring.entities;
 
 import java.io.Serializable;
 
-public class Movie implements Comparable<Object>,Serializable {
+public class Movie implements Comparable<Object>, Serializable {
 	private String movieID;
 	private String title;
 	private int minAge;
 
-	public Movie(String movieID, String title, int minAge) {
-		this.movieID = movieID;
+	public Movie(String title, int minAge) {
+		this.movieID = "";
 		this.title = title;
 		this.minAge = minAge;
 	}
-	public String getMovieID()
-	{
+
+	public void setMovieID(String movieID) {
+		this.movieID = movieID;
+	}
+
+	public String getMovieID() {
 		return movieID;
 	}
-	public int getMinAge()
-	{
+
+	public int getMinAge() {
 		return minAge;
 	}
 

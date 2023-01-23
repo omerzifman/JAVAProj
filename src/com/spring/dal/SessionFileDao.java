@@ -12,8 +12,8 @@ import com.spring.serialization.Serialization;
 @Component("SessionFileDao")
 public class SessionFileDao implements SessionsDao
 {
-	public static String fileName = "src\\sessions.dat";
-	public static Serialization<Session> Serialzator;
+	private String fileName = "src\\sessions.dat";
+	private Serialization<Session> Serialzator;
 	public SessionFileDao()
 	{
 		Serialzator = new Serialization<Session>();
