@@ -222,8 +222,6 @@ public class CinemaCLI {
 	{
 		//init cinema
 		initBeans(); // generate
-		Sessions.setMaxSessions(5); // num of theaters in cinema
-		Sessions.setMaxCapacityInCinema(500);
 
 		// ------------------------menu-------------------------------------
 
