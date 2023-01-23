@@ -20,7 +20,6 @@ public class Serialization<T>
 	}
 	public ArrayList<T> deserialize(String fileName) throws IOException,ClassNotFoundException
 	{
-		 
         FileInputStream fis = new FileInputStream(fileName);
         ObjectInputStream ois = new ObjectInputStream(fis);
         ArrayList<T> arr = (ArrayList<T>) ois.readObject();

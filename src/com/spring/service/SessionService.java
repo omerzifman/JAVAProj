@@ -55,9 +55,23 @@ public class SessionService
 		{
 			throw new NotEnoughCapacityForSessionException("There is no éhall with capacity over " +maxCapacityInCinema + " therefore this session cant be added to schedule");
 		}
+		session.setSessionID(getAvaliableSessionId());
 		sessionHandler.save(session);
 		
 		
+	}
+	public String getAvaliableSessionId() throws Exception
+	{
+		List<Session> list = getAll();
+		int minimumId = 1;
+		for(int i =0;i< list.size();i++)
+		{
+			if(list.get(i).getSessionID().equals(Integer.toString(minimumId)))
+			{
+				minimumId++;
+			}
+		}
+		return Integer.toString(minimumId);
 	}
 	public void update(Session session) throws Exception
 	{

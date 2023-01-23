@@ -222,7 +222,7 @@ public class CinemaCLI {
 	{
 		//init cinema
 		initBeans(); // generate
-
+		// Fix Letters input
 		// ------------------------menu-------------------------------------
 
 		int selection;
